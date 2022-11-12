@@ -1,8 +1,41 @@
 .section__characters{
-    display: flex;
-    justify-content: center;
-    color: orange;
-    font-weight: 500;
-    font-size: 18px;
     margin-top: 20px;
+    &--title{
+        font-weight: 500;
+        font-size: 18px;
+        color: orange;
+        text-align: center;
+    }
+    &--list{
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        margin: 20px 170px 20px 170px;
+        grid-gap: 20px;
+    }
+}
+
+.characters{
+    padding: 10px 20px 10px 20px;
+    box-shadow: 0 0 10px #888888;
+    &__card{
+        //width: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        &--img{
+            height: 330px;
+            width: 250px;
+            margin-bottom: 10px;
+        }
+        &--name{
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        &--text{
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+    }
 }
