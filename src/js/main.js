@@ -9,6 +9,7 @@ const input = document.querySelector('.js-input');
 // VARIABLES GLOBALES -> VARIABLES CON DATOS DE LA APP
 
 let allCharacters = [];
+let favouriteCharacters = [];
 
 // FUNCIONES
 
@@ -16,7 +17,7 @@ let allCharacters = [];
 
 function renderOneCharacter(oneCharacter){
   return `<li class="characters">
-  <article class="characters__card">
+  <article class="characters__card js-characters-card">
     <img class="characters__card--img" src="${oneCharacter.img}" alt="${oneCharacter.name}">
     <h2 class="characters__card--name"> ${oneCharacter.name} </h2>
     <p class="characters__card--text"> ${oneCharacter.status} </p>
@@ -37,6 +38,7 @@ function renderAllCharacters(){
 function renderOneCharacter(oneCharacter){
   const liElement = document.createElement('li');
   liElement.classList.add('characters');
+  liElement.classList.add('js-characters-card');
   const articleElement = document.createElement('article');
   articleElement.classList.add('characters__card');
   const imgElement = document.createElement('img');
@@ -63,6 +65,7 @@ function renderAllCharacters(){
   for (let i = 0; i < allCharacters.length; i++){
     charactersList.appendChild(renderOneCharacter(allCharacters[i]));
   }
+  addListeners();
 }
 
 /* 3.1 BÚSQUEDA: Función que se activa con el evento click del botón, recoge el valor del input, se lo pasa a la función de filtrar y esta se lo pasa a la de renderizar el personaje filtrado */
@@ -132,20 +135,22 @@ function renderOneFilteredCharacter(filteredCharacter){
   return liElement;
 } */
 
+/* 4. FAVORITOS: */
+
+function addListeners(){
+  const allCards = document.querySelectorAll('.js-characters-card');
+  for (const eachCard of allCards){
+    eachCard.addEventListener('click', handleClickCard);
+  }
+}
+
+function handleClickCard(event){
+  event.currentTarget.classList.toggle('selected');
+}
 
 // EVENTOS
 
 searchBtn.addEventListener('click', handleClick);
-
-// CÓDIGO QUE SE EJECUTA AL CARGAR LA PÁGINA
-
-let html = '';
-
-for (let i = 0; i < allCharacters.length; i++){
-  charactersList.innerHTML = renderOneCharacter(allCharacters[i]);
-}
-
-charactersList.innerHTML = html;
 
 // PETICIONES AL SERVIDOR
 
