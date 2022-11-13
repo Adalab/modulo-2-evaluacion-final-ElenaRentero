@@ -5,6 +5,8 @@
 const charactersList = document.querySelector('.js-characters-list');
 const searchBtn = document.querySelector('.js-search-btn');
 const input = document.querySelector('.js-input');
+const sectionFavourites = document.querySelector('.js-section-favourites');
+const favouritesList = document.querySelector('.js-favourites-list');
 
 // VARIABLES GLOBALES -> VARIABLES CON DATOS DE LA APP
 
@@ -17,7 +19,7 @@ let favouriteCharacters = [];
 
 function renderOneCharacter(oneCharacter){
   return `<li class="characters">
-  <article class="characters__card js-characters-card">
+  <article class="characters__card">
     <img class="characters__card--img" src="${oneCharacter.img}" alt="${oneCharacter.name}">
     <h2 class="characters__card--name"> ${oneCharacter.name} </h2>
     <p class="characters__card--text"> ${oneCharacter.status} </p>
@@ -39,6 +41,7 @@ function renderOneCharacter(oneCharacter){
   const liElement = document.createElement('li');
   liElement.classList.add('characters');
   liElement.classList.add('js-characters-card');
+  liElement.setAttribute('id', `${oneCharacter.char_id}`);
   const articleElement = document.createElement('article');
   articleElement.classList.add('characters__card');
   const imgElement = document.createElement('img');
@@ -144,8 +147,20 @@ function addListeners(){
   }
 }
 
+function renderFavourites(){
+  sectionFavourites.style = 'display: none; display: block;';
+  favouritesList.innerHTML = '';
+  for (let i = 0; i < favouriteCharacters.length; i++){
+    favouritesList.appendChild(renderOneCharacter(favouriteCharacters[i]));
+  }
+  addListeners();
+}
+
 function handleClickCard(event){
   event.currentTarget.classList.toggle('selected');
+  const selectedCharactersObj = allCharacters.find((eachCharacterObj) => eachCharacterObj.char_id === parseInt(event.currentTarget.id));
+  favouriteCharacters.push(selectedCharactersObj);
+  renderFavourites();
 }
 
 // EVENTOS
