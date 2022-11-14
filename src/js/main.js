@@ -8,7 +8,7 @@ const input = document.querySelector('.js-input');
 const sectionFavourites = document.querySelector('.js-section-favourites');
 const favouritesList = document.querySelector('.js-favourites-list');
 const deleteBtn = document.querySelector('.js-delete-btn');
-const charactersFavErase = document.querySelectorAll('.js-characters-erase');
+//const charactersFavErase = document.querySelectorAll('.js-characters-erase');
 
 // VARIABLES GLOBALES -> VARIABLES CON DATOS DE LA APP
 
@@ -73,10 +73,10 @@ function renderOneCharacter(oneCharacter){
   return liElement;
 }
 
-function renderAllCharacters(){
+function renderAllCharacters(characters){
   charactersList.innerHTML = '';
-  for (let i = 0; i < allCharacters.length; i++){
-    charactersList.appendChild(renderOneCharacter(allCharacters[i]));
+  for (let i = 0; i < characters.length; i++){
+    charactersList.appendChild(renderOneCharacter(characters[i]));
   }
   addListenersCharacters();
 }
@@ -87,17 +87,10 @@ function filterCharacters(value){
   return allCharacters.filter((eachCharacter) => eachCharacter.name.toLowerCase().includes(value));
 }
 
-function renderFilterCharacters(filteredCharacter){
-  charactersList.innerHTML = '';
-  for (let i = 0; i < filteredCharacter.length; i++){
-    charactersList.appendChild(renderOneCharacter(filteredCharacter[i]));
-  }
-}
-
 function handleClickSearch(event) {
   event.preventDefault();
   const valueInput = input.value.toLowerCase();
-  renderFilterCharacters(filterCharacters(valueInput));
+  renderAllCharacters(filterCharacters(valueInput));
 }
 
 /* 3.2 BÚSQUEDA: Función que realiza una petición al servidor con el valor del input y lo pinta en la página manipulando de forma avanzada el DOM
@@ -146,7 +139,7 @@ function renderOneFilteredCharacter(filteredCharacter){
   articleElement.appendChild(titleElement);
   articleElement.appendChild(textElement);
   return liElement;
-} */
+}*/
 
 /* 4. FAVORITOS Y 5. LOCAL STORAGE: */
 
@@ -229,18 +222,18 @@ if (savedFavourites !== null ){
   favouriteCharacters = savedFavourites;
   renderAllFavourites();
   deleteBtn.style = 'display: none; display: block;';
-}
+} 
 
 /* 6. BONUS: BORRAR FAVORITOS 
 
 function addListenersFavourites(){
   const allErase = document.querySelectorAll('.js-favourites-erase');
   for (const eachErase of allErase){
-    eachErase.addEventListener('click', handleClicCross);
+    eachErase.addEventListener('click', console.log('Hola'));
   }
-}
+} */
 
-function handleClicCross(event){
+/*function handleClicCross(event){
   const selectedCharacter = allCharacters.find((eachCharacterObj) => eachCharacterObj.char_id === parseInt(event.currentTarget.id));
   const favouriteCharacterIndex = favouriteCharacters.findIndex((eachCharacterObj) => eachCharacterObj.char_id === parseInt(event.currentTarget.id));
   if (favouriteCharacterIndex === -1){
@@ -251,7 +244,7 @@ function handleClicCross(event){
   }
   localStorage.setItem('favourites', JSON.stringify(favouriteCharacters));
   renderAllFavourites();
-}*/
+}
 
 function handleClickErase(){
   favouriteCharacters = [];
@@ -263,12 +256,12 @@ function handleClickErase(){
       eachCard.classList.remove('selected');
     }
   }
-}
+}*/
 
 // EVENTOS
 
 searchBtn.addEventListener('click', handleClickSearch);
-deleteBtn.addEventListener('click', handleClickErase);
+//deleteBtn.addEventListener('click', handleClickErase);
 
 // PETICIONES AL SERVIDOR
 
@@ -281,5 +274,5 @@ fetch(serverUrl, {
   .then((response) => response.json())
   .then((data) => {
     allCharacters = data;
-    renderAllCharacters();
+    renderAllCharacters(allCharacters);
   });
