@@ -168,6 +168,7 @@ function renderOneFavourite(favCharacter){
   const divElement = document.createElement('div');
   divElement.classList.add('favourites__erase');
   divElement.classList.add('js-favourites-erase');
+  divElement.setAttribute('id', `${favCharacter.char_id}`);
   const divElementContent = document.createTextNode(`x`);
   divElement.appendChild(divElementContent);
   const articleElement = document.createElement('article');
@@ -201,7 +202,7 @@ function renderAllFavourites(){
       favouritesList.appendChild(renderOneFavourite(favouriteCharacters[i]));
     }
   }
-  //addListenersFavourites();
+  addListenersFavourites();
 }
 
 function handleClickCard(event){
@@ -222,26 +223,23 @@ if (savedFavourites !== null ){
   favouriteCharacters = savedFavourites;
   renderAllFavourites();
   deleteBtn.style = 'display: none; display: block;';
-} 
+}
 
-/* 6. BONUS: BORRAR FAVORITOS 
+/* 6. BONUS: BORRAR FAVORITOS */
 
 function addListenersFavourites(){
   const allErase = document.querySelectorAll('.js-favourites-erase');
   for (const eachErase of allErase){
-    eachErase.addEventListener('click', console.log('Hola'));
+    eachErase.addEventListener('click', handleClickCross);
   }
-} */
+}
 
-/*function handleClicCross(event){
-  const selectedCharacter = allCharacters.find((eachCharacterObj) => eachCharacterObj.char_id === parseInt(event.currentTarget.id));
+function handleClickCross(event){
   const favouriteCharacterIndex = favouriteCharacters.findIndex((eachCharacterObj) => eachCharacterObj.char_id === parseInt(event.currentTarget.id));
-  if (favouriteCharacterIndex === -1){
-    favouriteCharacters.push(selectedCharacter);
-    deleteBtn.style = 'display: none; display: block;';
-  } else {
-    favouriteCharacters.splice(favouriteCharacterIndex, 1);
-  }
+  const liElements = document.querySelectorAll('.js-characters-card');
+  const selectedCharacter = Array.from(liElements).find((eachCharacterLi) => eachCharacterLi.id === event.currentTarget.id);
+  selectedCharacter.classList.remove('selected');
+  favouriteCharacters.splice(favouriteCharacterIndex, 1);
   localStorage.setItem('favourites', JSON.stringify(favouriteCharacters));
   renderAllFavourites();
 }
@@ -256,12 +254,12 @@ function handleClickErase(){
       eachCard.classList.remove('selected');
     }
   }
-}*/
+}
 
 // EVENTOS
 
 searchBtn.addEventListener('click', handleClickSearch);
-//deleteBtn.addEventListener('click', handleClickErase);
+deleteBtn.addEventListener('click', handleClickErase);
 
 // PETICIONES AL SERVIDOR
 
