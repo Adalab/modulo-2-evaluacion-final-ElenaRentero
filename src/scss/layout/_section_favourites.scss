@@ -1,9 +1,15 @@
 .section__favourites{
     display: none;
     margin-top: 20px;
-    width: 30vw;
+    width: 50vw;
     order: 1;
     border-right: solid 2px orange;
+    @media all and (min-width: 768px){
+        width: 50vw;
+    }
+    @media all and (min-width: 1200px){
+        width: 40vw;
+    }
     &--title{
         font-weight: 500;
         font-size: 18px;
@@ -12,9 +18,22 @@
     }
     &--list{
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        margin: 20px 120px 20px 120px;
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        margin: 20px 12px 20px 12px;
         grid-gap: 20px;
+        justify-items: center;
+        @media all and (min-width: 768px){
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            margin: 20px 30px 20px 30px;
+            grid-gap: 20px;
+        }
+        @media all and (min-width: 1200px){
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            margin: 20px 120px 20px 120px;
+            grid-gap: 20px;
+        }
     }
     &--btn{
         color: white;
@@ -22,38 +41,65 @@
         border: none;
         cursor: pointer;
         padding: 10px 10px 10px 10px;
-        transform: translateX(300%);
+        transform: translateX(30%);
         display: none;
+        font-family: 'Sono', sans-serif;
+        @media all and (min-width: 768px){
+            transform: translateX(100%);
+        }
+        @media all and (min-width: 1200px){
+            transform: translateX(220%);
+        }
     }
 }
 
 .favourites{
     padding: 10px 20px 10px 20px;
-    box-shadow: 0 0 10px #888888;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    width: 100px;
+    height: 220px;
     display: flex;
     flex-direction: column;
+    border-radius: 20px;
+    @media all and (min-width: 768px){
+        height: 320px;
+        width: 200px;
+    }
+    @media all and (min-width: 1200px){
+        height: 405px;
+        width: 280px;
+    }
     &__erase{
         color: black;
         width: 1ch;
         border: solid 2px orange;
         border-radius: 10px;
-        padding: 0 3px 1px 4px;
+        padding: 0 4px 2px 4px;
         margin-bottom: 2px;
         cursor: pointer;
         font-weight: 600;
         align-self: flex-end;
     }
     &__card{
-        //width: 100px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         cursor: pointer;
         &--img{
-            height: 330px;
-            width: 250px;
+            width: 100px;
+            height: 150px;
+            object-fit: cover;
             margin-bottom: 10px;
+            border-radius: 10px;
+            @media all and (min-width: 768px){
+                height: 250px;
+                width: 200px;
+            }
+            @media all and (min-width: 1200px){
+                height: 330px;
+                width: 250px;
+            }
         }
         &--name{
             font-size: 12px;
