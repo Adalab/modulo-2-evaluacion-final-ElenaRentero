@@ -38,7 +38,15 @@ function renderAllCharacters(){
 /* 2.2 INICIO: Función que recoge los personajes del servidor y los pinta manipulando de forma avanzada el DOM */
 
 function renderOneCharacter(oneCharacter){
+  const favouriteCharacterIndex = favouriteCharacters.findIndex((eachCharacterObj) => eachCharacterObj.char_id === oneCharacter.char_id);
+  let classFavourite = '';
+  if (favouriteCharacterIndex === -1){
+    classFavourite = '';
+  } else {
+    classFavourite = 'selected';
+  }
   const liElement = document.createElement('li');
+  liElement.setAttribute('class', `${classFavourite}`);
   liElement.classList.add('characters');
   liElement.classList.add('js-characters-card');
   liElement.setAttribute('id', `${oneCharacter.char_id}`);
