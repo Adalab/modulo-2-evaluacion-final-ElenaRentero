@@ -158,8 +158,20 @@ function renderFavourites(){
 
 function handleClickCard(event){
   event.currentTarget.classList.toggle('selected');
-  const selectedCharactersObj = allCharacters.find((eachCharacterObj) => eachCharacterObj.char_id === parseInt(event.currentTarget.id));
-  favouriteCharacters.push(selectedCharactersObj);
+  const selectedCharacter = allCharacters.find((eachCharacterObj) => eachCharacterObj.char_id === parseInt(event.currentTarget.id));
+  const favouriteCharacterIndex = favouriteCharacters.findIndex((eachCharacterObj) => eachCharacterObj.char_id === parseInt(event.currentTarget.id));
+  if (favouriteCharacterIndex === -1){
+    favouriteCharacters.push(selectedCharacter);
+  } else {
+    favouriteCharacters.splice(favouriteCharacterIndex, 1);
+  }
+  localStorage.setItem('favourites', JSON.stringify(favouriteCharacters));
+  renderFavourites();
+}
+
+const savedFavourites = JSON.parse(localStorage.getItem('favourites'));
+if (savedFavourites !== null){
+  favouriteCharacters = savedFavourites;
   renderFavourites();
 }
 
@@ -179,4 +191,5 @@ fetch(serverUrl, {
   .then((data) => {
     allCharacters = data;
     renderAllCharacters();
-  });
+  })
+  .catch(error => console.log(error));
