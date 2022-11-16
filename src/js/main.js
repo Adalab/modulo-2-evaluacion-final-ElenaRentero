@@ -8,6 +8,7 @@ const input = document.querySelector('.js-input');
 const sectionFavourites = document.querySelector('.js-section-favourites');
 const favouritesList = document.querySelector('.js-favourites-list');
 const deleteBtn = document.querySelector('.js-delete-btn');
+const logBtn = document.querySelector('.js-log-btn');
 //const charactersFavErase = document.querySelectorAll('.js-characters-erase');
 
 // VARIABLES GLOBALES -> VARIABLES CON DATOS DE LA APP
@@ -62,6 +63,12 @@ function renderOneCharacter(oneCharacter){
   titleElement.classList.add('characters__card--name');
   const titleElementContent = document.createTextNode(`${oneCharacter.name}`);
   titleElement.appendChild(titleElementContent);
+  const SeasonsElement = document.createElement('p');
+  const SeasonsElementContent = document.createTextNode(`${oneCharacter.appearance}`);
+  SeasonsElement.appendChild(SeasonsElementContent);
+  const superCharacter = document.createElement('p');
+  const superCharacterContent = document.createTextNode(`Super personaje`);
+  superCharacter.appendChild(superCharacterContent);
   const textElement = document.createElement('p');
   textElement.classList.add('characters__card--text');
   const textElementContent = document.createTextNode(`${oneCharacter.status}`);
@@ -69,6 +76,10 @@ function renderOneCharacter(oneCharacter){
   liElement.appendChild(articleElement);
   articleElement.appendChild(imgElement);
   articleElement.appendChild(titleElement);
+  articleElement.appendChild(SeasonsElement);
+  if (SeasonsElementContent.data === '1,2,3,4,5'){
+    articleElement.appendChild(superCharacter);
+  }
   articleElement.appendChild(textElement);
   return liElement;
 }
@@ -256,10 +267,20 @@ function handleClickErase(){
   }
 }
 
+/* BOTÓN LOG */
+
+function handleClickLog(event){
+  event.preventDefault();
+  if (favouriteCharacters !== null){
+    console.log(`Tienes ` + favouriteCharacters.length + ` personajes favoritos`);
+  }
+}
+
 // EVENTOS
 
 searchBtn.addEventListener('click', handleClickSearch);
 deleteBtn.addEventListener('click', handleClickErase);
+logBtn.addEventListener('click', handleClickLog);
 
 // PETICIONES AL SERVIDOR
 
