@@ -1,12 +1,12 @@
 ![header](https://user-images.githubusercontent.com/111798280/201878083-3582f8b7-7ff8-4673-ac94-3354322e5389.jpg)
 
-# Módulo 2: Ejercicio de evaluación final ⚗
+# Proyecto Vanilla JavaScript Breaking-Bad ⚗
 
-En este repositorio se presenta el ejercicio de evaluación final de Elena Clemente Rentero para el segundo módulo de programación con JavaScript del curso de desarrolladora front-end impartido por Adalab. 
+A continuación encontrarás una breve guía sobre el funcionamiento y cómo instalar esta aplicación web que trata sobre la famosa serie Breaking Bad, permitiéndote recorrer un listado de los mismos para que puedas elegir a tus favoritos.
 
 ## Descripción 🧾
 
-El ejercicio consiste en desarrollar una aplicación web de Breaking Bad que nos permite des/marcar los personajes como favoritos y guardarlos en el local storage. El ejercicio está desarrollado utlizando HTML, Sass y JavaScript. 
+Aplicación web de Breaking Bad que nos permite des/marcar los personajes como favoritos y guardarlos en el local storage. El proyecto está desarrollado utlizando HTML, Sass y JavaScript. 
 
 ## Funcionamiento 🔨
 
