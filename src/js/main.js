@@ -8,7 +8,6 @@ const input = document.querySelector('.js-input');
 const sectionFavourites = document.querySelector('.js-section-favourites');
 const favouritesList = document.querySelector('.js-favourites-list');
 const deleteBtn = document.querySelector('.js-delete-btn');
-//const charactersFavErase = document.querySelectorAll('.js-characters-erase');
 
 // VARIABLES GLOBALES -> VARIABLES CON DATOS DE LA APP
 
@@ -263,7 +262,7 @@ deleteBtn.addEventListener('click', handleClickErase);
 
 // PETICIONES AL SERVIDOR
 
-const serverUrl = 'https://www.breakingbadapi.com/api/characters';
+const serverUrl = './assets/data/characters.json';
 
 fetch(serverUrl, {
   method: 'GET',
