@@ -16,27 +16,7 @@ let favouriteCharacters = [];
 
 // FUNCIONES
 
-/* 2.1 INICIO: Función que recoge los personajes del servidor y los pinta siguiendo el método de innerHTML
-
-function renderOneCharacter(oneCharacter){
-  return `<li class="characters">
-  <article class="characters__card">
-    <img class="characters__card--img" src="${oneCharacter.img}" alt="${oneCharacter.name}">
-    <h2 class="characters__card--name"> ${oneCharacter.name} </h2>
-    <p class="characters__card--text"> ${oneCharacter.status} </p>
-  </article>
-  </li>`;
-}
-
-function renderAllCharacters(){
-  let listHtml = '';
-  for (let i = 0; i < allCharacters.length; i++){
-    listHtml += renderOneCharacter(allCharacters[i]);
-  }
-  charactersList.innerHTML = listHtml;
-} */
-
-/* 2.2 INICIO: Función que recoge los personajes del servidor y los pinta manipulando de forma avanzada el DOM */
+/* 2.1 INICIO: Función que recoge los personajes del servidor y los pinta manipulando de forma avanzada el DOM */
 
 function renderOneCharacter(oneCharacter){
   const favouriteCharacterIndex = favouriteCharacters.findIndex((eachCharacterObj) => eachCharacterObj.char_id === oneCharacter.char_id);
@@ -91,54 +71,6 @@ function handleClickSearch(event) {
   const valueInput = input.value.toLowerCase();
   renderAllCharacters(filterCharacters(valueInput));
 }
-
-/* 3.2 BÚSQUEDA: Función que realiza una petición al servidor con el valor del input y lo pinta en la página manipulando de forma avanzada el DOM
-
-function handleClick(event){
-  event.preventDefault();
-  const valueInput = input.value.toLowerCase();
-  let serverUrlFilter = `https://www.breakingbadapi.com/api/characters?name=${valueInput}`;
-  fetch(serverUrlFilter, {
-    method: 'GET',
-    headers: {'Content-Type': 'application/json'},
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      let filteredCharacters = data;
-      renderFilteredCharacters(filteredCharacters);
-    });
-}
-
-function renderFilteredCharacters(filteredCharacters){
-  charactersList.innerHTML = '';
-  for (let i = 0; i < filteredCharacters.length; i++){
-    charactersList.appendChild(renderOneFilteredCharacter(filteredCharacters[i]));
-  }
-}
-
-function renderOneFilteredCharacter(filteredCharacter){
-  const liElement = document.createElement('li');
-  liElement.classList.add('characters');
-  const articleElement = document.createElement('article');
-  articleElement.classList.add('characters__card');
-  const imgElement = document.createElement('img');
-  imgElement.classList.add('characters__card--img');
-  imgElement.setAttribute('src', `${filteredCharacter.img}`);
-  imgElement.setAttribute('alt', `${filteredCharacter.name}`);
-  const titleElement = document.createElement('h2');
-  titleElement.classList.add('characters__card--name');
-  const titleElementContent = document.createTextNode(`${filteredCharacter.name}`);
-  titleElement.appendChild(titleElementContent);
-  const textElement = document.createElement('p');
-  textElement.classList.add('characters__card--text');
-  const textElementContent = document.createTextNode(`${filteredCharacter.status}`);
-  textElement.appendChild(textElementContent);
-  liElement.appendChild(articleElement);
-  articleElement.appendChild(imgElement);
-  articleElement.appendChild(titleElement);
-  articleElement.appendChild(textElement);
-  return liElement;
-}*/
 
 /* 4. FAVORITOS Y 5. LOCAL STORAGE: */
 
